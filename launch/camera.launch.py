@@ -44,6 +44,7 @@ from camera_config import CameraConfig, USB_CAM_DIR  # noqa: E402
 from launch import LaunchDescription  # noqa: E402
 from launch.actions import GroupAction  # noqa: E402
 from launch_ros.actions import Node  # noqa: E402
+from launch.substitutions import LaunchConfiguration
 
 
 CAMERAS = []
@@ -69,6 +70,7 @@ def generate_launch_description():
             name=camera.name,
             namespace=camera.namespace,
             parameters=[camera.param_path],
+            arguments=['--ros-args', '--log-level', 'DEBUG'],
             remappings=camera.remappings
         )
         for camera in CAMERAS
